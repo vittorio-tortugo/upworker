@@ -1,5 +1,5 @@
-if (location.pathname.indexOf('find-work-home') > -1) {
-  var jobsWrapper = document.getElementById('jsJobResults');
+if ((location.pathname.indexOf('find-work-home') > -1) || (location.pathname.indexOf('/jobs/saved') > -1)) {
+  var jobsWrapper = document.getElementsByTagName('section')[0];
   var jobs = jobsWrapper.getElementsByTagName('article');
 
   Array.prototype.forEach.call(jobs, function(job) {
