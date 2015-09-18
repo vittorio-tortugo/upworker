@@ -11,3 +11,4 @@ Simple extension to do your work on Upwork easier
 * Show counters on my-proposals page PLANNED v0.1.2
 * Show counters when jobs adding to page PLANNED v0.1.3
 * New extension icon PLANNED v0.2
+* Additional counters styling PLANNED v0.2
