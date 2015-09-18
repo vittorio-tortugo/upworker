@@ -8,4 +8,6 @@ Simple extension to do your work on Upwork easier
 
 * Autoupdate counters data every minute
 * Show counters on saved-jobs page
+* Show counters on my-proposals page
 * Show counters when jobs adding to page
+* New extension icon
