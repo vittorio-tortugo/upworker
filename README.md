@@ -6,8 +6,8 @@ Simple extension to do your work on Upwork easier
 
 ## Roadmap
 
-* Autoupdate counters data every minute
-* Show counters on saved-jobs page
-* Show counters on my-proposals page
-* Show counters when jobs adding to page
-* New extension icon
+* Autoupdate counters data every minute PLANNED v0.1.4
+* Show counters on saved-jobs page PLANNED v0.1.1
+* Show counters on my-proposals page PLANNED v0.1.2
+* Show counters when jobs adding to page PLANNED v0.1.3
+* New extension icon PLANNED v0.2
