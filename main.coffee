@@ -31,8 +31,12 @@ load_counters_data_for = (jobEl) ->
       show_counters(response, jobEl)
   xhr.send()
 
-if is_should_show_counters()
-  jobs = get_jobs_elements()
+init_counters = ->
+  if is_should_show_counters()
+    jobs = get_jobs_elements()
 
-  Array::forEach.call jobs, (job) ->
-    load_counters_data_for(job)
+    Array::forEach.call jobs, (job) ->
+      load_counters_data_for(job)
+
+init_counters()
+setInterval init_counters, 60 * 1000
