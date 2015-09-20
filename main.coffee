@@ -1,6 +1,9 @@
+is_in_find_work_page = ->
+  location.pathname.indexOf('find-work-home') > -1
+
 is_should_show_counters = ->
-  return true if location.pathname.indexOf('find-work-home') > -1
-  return true if location.pathname.indexOf('/jobs/saved') > -1
+  return true if is_in_find_work_page()
+  return true if location.pathname.indexOf('jobs/saved') > -1
   return false
 
 get_jobs_elements = ->
@@ -38,5 +41,14 @@ init_counters = ->
     Array::forEach.call jobs, (job) ->
       load_counters_data_for(job)
 
+pseudo_callback = ->
+  setTimeout init_counters, 10 * 1000
+
 init_counters()
 setInterval init_counters, 60 * 1000
+if is_in_find_work_page()
+  moreJobsButton = document.getElementById('jsLoadMoreJobs')
+  freshJobsButton = document.getElementById('')
+
+  moreJobsButton?.addEventListener 'click', pseudo_callback
+  freshJobsButton?.addEventListener 'click', pseudo_callback
