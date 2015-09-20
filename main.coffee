@@ -42,7 +42,7 @@ init_counters = ->
       load_counters_data_for(job)
 
 pseudo_callback = ->
-  setTimeout init_counters, 10 * 1000
+  # setTimeout init_counters, 10 * 1000
 
 init_counters()
 setInterval init_counters, 60 * 1000

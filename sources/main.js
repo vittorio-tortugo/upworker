@@ -65,9 +65,7 @@
     }
   };
 
-  pseudo_callback = function() {
-    return setTimeout(init_counters, 10 * 1000);
-  };
+  pseudo_callback = function() {};
 
   init_counters();
 
