@@ -1,10 +1,13 @@
+is_same_page = (url) ->
+  location.pathname.indexOf(url) > -1
 is_in_find_work_page = ->
-  location.pathname.indexOf('find-work-home') > -1
-
+  is_same_page 'find-work-home'
+is_in_saved_jobs_page = ->
+  is_same_page 'jobs/saved'
+is_in_proposals_page = ->
+  is_same_page 'applications/active'
 is_should_show_counters = ->
-  return true if is_in_find_work_page()
-  return true if location.pathname.indexOf('jobs/saved') > -1
-  return false
+  is_in_find_work_page() or is_in_saved_jobs_page()
 
 get_jobs_elements = ->
   jobsWrapper = document.getElementsByTagName('section')[0]
