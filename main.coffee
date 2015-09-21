@@ -55,3 +55,23 @@ if is_in_find_work_page()
 
   moreJobsButton?.addEventListener 'click', pseudo_callback
   freshJobsButton?.addEventListener 'click', pseudo_callback
+
+if is_in_proposals_page()
+  content_tables = document.getElementsByTagName 'table'
+  Array::forEach.call content_tables, (content_table) ->
+    header = content_table.getElementsByTagName('thead')[0]
+    content = content_table.getElementsByTagName('tbody')[0]
+    links = content.getElementsByTagName 'a'
+
+    Array::forEach.call links, (link) ->
+      url = link.getAttribute('href')
+      xhr = new XMLHttpRequest
+      xhr.open 'GET', url
+      xhr.onreadystatechange = ->
+        if xhr.response and xhr.response.length
+          target_phrase = 'Activity for this job'
+          target_segmant = xhr.response.substr(xhr.response.indexOf(target_phrase) + target_phrase.length, 250)
+          target_segmant = target_segmant.split 'li'
+          target_segmant.shift()
+          console.log target_segmant
+      xhr.send()
