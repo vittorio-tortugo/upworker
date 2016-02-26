@@ -1,17 +1,23 @@
+load_stack = []
+
 is_same_page = (url) ->
   location.pathname.indexOf(url) > -1
+
 is_in_find_work_page = ->
   is_same_page 'find-work-home'
+
 is_in_saved_jobs_page = ->
   is_same_page 'jobs/saved'
+
 is_in_proposals_page = ->
   is_same_page 'applications/active'
+
 is_should_show_counters = ->
-  is_in_find_work_page() or is_in_saved_jobs_page()
+  is_in_find_work_page() || is_in_saved_jobs_page()
 
 get_jobs_elements = ->
   jobsWrapper = document.getElementsByTagName('section')[0]
-  jobs = jobsWrapper.getElementsByTagName('article')
+  jobsWrapper.getElementsByTagName('article')
 
 show_counters = (data, jobEl) ->
   applicants_count = data.applicants.length
@@ -27,14 +33,19 @@ show_counters = (data, jobEl) ->
 
 load_counters_data_for = (jobEl) ->
   url = jobEl.getAttribute('data-id')
+  url = "/jobs/#{url}/applicants"
+
+  load_stack.push({url: url, el: jobEl})
+
+load_counters_data_by = (url, callback) ->
   xhr = new XMLHttpRequest
-  xhr.open 'GET', '/jobs/' + url + '/applicants'
+  xhr.open('GET', url)
 
   xhr.onreadystatechange = ->
-    return unless xhr.readyState is 4
-    if xhr.response and xhr.response.length
-      response = JSON.parse(xhr.response)
-      show_counters(response, jobEl)
+    if xhr.readyState == 4
+      if xhr.response?.length
+        response = JSON.parse(xhr.response)
+        callback(response)
   xhr.send()
 
 init_counters = ->
@@ -44,14 +55,28 @@ init_counters = ->
     Array::forEach.call jobs, (job) ->
       load_counters_data_for(job)
 
-pseudo_callback = ->
-  # setTimeout init_counters, 10 * 1000
-
 init_counters()
-setInterval init_counters, 60 * 1000
-if is_in_find_work_page()
-  moreJobsButton = document.getElementById('jsLoadMoreJobs')
-  freshJobsButton = document.getElementById('')
 
-  moreJobsButton?.addEventListener 'click', pseudo_callback
-  freshJobsButton?.addEventListener 'click', pseudo_callback
+setInterval ->
+  if load_stack.length
+    job = load_stack.shift()
+    load_counters_data_by(job.url, (response) ->
+      show_counters(response, job.el)
+    )
+, 100
+
+
+setInterval ->
+  init_counters()
+, 2 * 60 * 1000
+
+if is_in_find_work_page()
+  wrapper = document.getElementById('jsJobResults')
+  observer = new MutationObserver (mutations) ->
+    mutations.forEach (mutation) ->
+      if mutation.addedNodes && mutation.addedNodes.length
+        for node in mutation.addedNodes
+          if node.tagName == 'ARTICLE'
+            load_counters_data_for(node)
+
+  observer.observe(wrapper, {childList: true})
