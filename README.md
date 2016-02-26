@@ -14,3 +14,4 @@ Simple extension to do your work on Upwork easier
 - [ ] Auto conversion bids in local currency
 - [ ] New extension icon
 - [ ] Additional counters styling
+- [ ] Add user's settings
