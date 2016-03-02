@@ -4,7 +4,7 @@ is_same_page = (url) ->
   location.pathname.indexOf(url) > -1
 
 is_in_find_work_page = ->
-  is_same_page 'find-work-home'
+  is_same_page('find-work-home') || is_same_page('find-work')
 
 is_in_saved_jobs_page = ->
   is_same_page 'jobs/saved'

@@ -9,7 +9,7 @@
   };
 
   is_in_find_work_page = function() {
-    return is_same_page('find-work-home');
+    return is_same_page('find-work-home') || is_same_page('find-work');
   };
 
   is_in_saved_jobs_page = function() {
