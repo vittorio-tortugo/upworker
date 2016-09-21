@@ -14,12 +14,13 @@
     "default_icon": "icon.png"
   },
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "https://*.upwork.com/*"
   ],
   "content_scripts": [
     {
       "matches": ["https://*.upwork.com/*"],
-      "js": ["main.js"]
+      "js": ["content_script.js"]
     }
   ]
 }
