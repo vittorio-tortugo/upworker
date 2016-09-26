@@ -27,6 +27,12 @@ gulp.task 'copy-static', ->
   gulp
     .src('sources/*.json')
     .pipe(gulp.dest('compiled'))
+  gulp
+    .src('sources/*.js')
+    .pipe(gulp.dest('compiled'))
+  gulp
+    .src('sources/*.html')
+    .pipe(gulp.dest('compiled'))
 
 gulp.task 'compile', [
   'clean'
@@ -38,6 +44,7 @@ gulp.task 'watch', ['compile'], ->
   gulp.watch('sources/**/*.coffee', ['coffee-compile'])
   gulp.watch('sources/*.png', ['copy-static'])
   gulp.watch('sources/*.json', ['copy-static'])
+  gulp.watch('sources/*.html', ['copy-static'])
 
 gulp.task 'bump-version', ->
   type = argv.type

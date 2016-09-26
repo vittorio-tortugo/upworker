@@ -9,18 +9,22 @@
     "128": "icon128.png"
   },
   "author": "Victor Orlov",
-  "version" : "0.2.2",
+  "version" : "0.2.3",
   "browser_action": {
-    "default_icon": "icon.png"
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
   },
   "permissions": [
-    "activeTab",
-    "https://*.upwork.com/*"
+    "activeTab"
   ],
   "content_scripts": [
     {
       "matches": ["https://*.upwork.com/*"],
-      "js": ["content_script.js"]
+      "js": [
+        "jquery.min.js",
+        "content_script.js"
+      ],
+      "run_at": "document_start"
     }
   ]
 }
